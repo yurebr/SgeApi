@@ -10,24 +10,21 @@ import java.sql.DriverManager;
 
 /**
  *
- * @author Senai
+ * @author aluno
  */
 public class Conexao {
-
-    private static final String url = "jdbc:mysql://localhost:3306/loginCadastro";
+    private static final String url = "jdbc:mysql://localhost:3306/projeto_sge?useSSL=false";
     private static final String usuario = "root";
-    private static final String senha = "";
-
+    private static final String senha = "root";
+    
     public static Connection conectar() {
-        Connection conexao = null;
-
+        Connection conn =null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conexao = DriverManager.getConnection(url, usuario, senha);
-
+            conn = DriverManager.getConnection(url, usuario, senha);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return conexao;
+        return conn;
     }
 }

@@ -9,20 +9,25 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.bean.Disciplina;
+import model.dao.DisciplinaDAO;
 
 /**
  *
  * @author Senai
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/ola"})
-public class Controller extends HttpServlet {
-   Gson conversor = new Gson();
+@WebServlet(name = "DisciplinaController", urlPatterns = {"/DisciplinaController", "/disciplinas", "/disciplina"})
+public class DisciplinaController extends HttpServlet {
+    
+    Gson conversor = new Gson();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,10 +45,10 @@ public class Controller extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Controller</title>");            
+            out.println("<title>Servlet DisciplinaController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Controller at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DisciplinaController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,18 +66,40 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
         String url = request.getServletPath();
         
-        if(url.equals("/ola")) {
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            Map<String, String> res = new HashMap<String, String>();
-            res.put("mensagem", "olá mundo");
+        if (url.equals("/disciplinas")) { // Verifica se a URL solicitada é "/disciplinas"
+
+            response.setContentType("application/JSON"); // Define o tipo de conteúdo da resposta como JSON
+            response.setCharacterEncoding("UTF-8"); // Define a codificação de caracteres da resposta como UTF-8
+
+            // Cria um HashMap para armazenar a lista de disciplinas
+            Map<String, List<Disciplina>> res = new HashMap<String, List<Disciplina>>();
+
+            // Adiciona ao HashMap uma entrada com a chave "disciplinas" e o valor sendo a lista de disciplinas retornada pelo método lerDisciplinas() da classe DisciplinaDAO
+            res.put("disciplinas", new DisciplinaDAO().lerDisciplinas());
+
+            // Obtém um PrintWriter a partir da resposta para enviar dados de volta ao cliente
             PrintWriter out = response.getWriter();
+
+            // Converte o HashMap res para JSON e escreve na resposta
             out.write(conversor.toJson(res));
+
+            // Assegura que todos os dados foram enviados ao cliente
             out.flush();
+        } else if (url.endsWith("disciplina")) {
+            response.setContentType("application/JSON");
+            response.setCharacterEncoding("UTF-8");
             
+            int id = Integer.parseInt(request.getParameter("id_disciplina"));
+            
+            PrintWriter out = response.getWriter();
+            out.write(conversor.toJson(new DisciplinaDAO().lerDisciplina(id)));
+            out.flush();
+        
         }
+        
     }
 
     /**

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bean;
+package model.bean;
 
 /**
  *
- * @author Senai
+ * @author aluno
  */
 public class Area {
     private int id;
@@ -46,5 +46,6 @@ public class Area {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+    
     
 }

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bean;
+package model.bean;
 
 /**
  *
- * @author Senai
+ * @author aluno
  */
 public class Disciplina {
     private int id_disciplina;
@@ -48,5 +48,4 @@ public class Disciplina {
     }
     
     
-            
 }

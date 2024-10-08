@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bean;
+package model.bean;
 
-import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -14,23 +14,23 @@ import java.util.Date;
 public class Professor {
     private int id_professor;
     private String nome;
-    private String matricula;
-    private Date admissao;
+    private String sobrenome;
     private String senha;
     private String cpf;
-    private int area;
+    private String imagem;
+    private List<Disciplina> disciplina;
 
     public Professor() {
     }
 
-    public Professor(int id_professor, String nome, String matricula, Date admissao, String senha, String cpf, int area) {
+    public Professor(int id_professor, String nome, String sobrenome, String senha, String cpf, String imagem, List<Disciplina> disciplina) {
         this.id_professor = id_professor;
         this.nome = nome;
-        this.matricula = matricula;
-        this.admissao = admissao;
+        this.sobrenome = sobrenome;
         this.senha = senha;
         this.cpf = cpf;
-        this.area = area;
+        this.imagem = imagem;
+        this.disciplina = disciplina;
     }
 
     public int getId_professor() {
@@ -49,20 +49,12 @@ public class Professor {
         this.nome = nome;
     }
 
-    public String getMatricula() {
-        return matricula;
+    public String getSobrenome() {
+        return sobrenome;
     }
 
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
-    public Date getAdmissao() {
-        return admissao;
-    }
-
-    public void setAdmissao(Date admissao) {
-        this.admissao = admissao;
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 
     public String getSenha() {
@@ -81,13 +73,23 @@ public class Professor {
         this.cpf = cpf;
     }
 
-    public int getArea() {
-        return area;
+    public String getImagem() {
+        return imagem;
     }
 
-    public void setArea(int area) {
-        this.area = area;
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
+
+    public List<Disciplina> getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(List<Disciplina> disciplina) {
+        this.disciplina = disciplina;
+    }
+    
+    
     
     
 }
